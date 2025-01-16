@@ -8,12 +8,19 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
+        //initialize array to store multiples
+        double[] multiples = new double[length];
+        //calculate the multiples
+        for (int i = 0; i < length; i++)
+        {
+            multiples[i] = number * (i + 1);
+        }
         // TODO Problem 1 Start
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
@@ -25,9 +32,15 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        //calculate the rotation amount
+        int rotationAmount = amount % data.Count;
+        //split the list into two parts
+        List<int> rotatedPart = data.GetRange(data.Count - rotationAmount, rotationAmount);
+        List<int> remainingPart = data.GetRange(0, data.Count - rotationAmount);
+        //clear the original list
+        data.Clear();
+        data.AddRange(rotatedPart);
+        data.AddRange(remainingPart);
     }
+
 }
