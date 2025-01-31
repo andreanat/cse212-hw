@@ -11,7 +11,7 @@ public class TakingTurnsQueue
 {
     private readonly PersonQueue _people = new();
 
-    public int Length => _people.Length;
+    public int Length => _people.Length;//get the number of people
 
     /// <summary>
     /// Add new people to the queue with a name and number of turns
@@ -20,9 +20,16 @@ public class TakingTurnsQueue
     /// <param name="turns">Number of turns remaining</param>
     public void AddPerson(string name, int turns)
     {
-        var person = new Person(name, turns);
-        _people.Enqueue(person);
+        //number of turns should not be negative
+        if (turns < 0)
+        {
+            throw new ArgumentException("Turns cannot be negative.");
+        }
+        var person = new Person(name, turns);//create a new person
+        _people.Enqueue(person);//add them to the queue
+
     }
+    
 
     /// <summary>
     /// Get the next person in the queue and return them. The person should
