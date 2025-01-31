@@ -20,12 +20,6 @@ public class TakingTurnsQueue
     /// <param name="turns">Number of turns remaining</param>
     public void AddPerson(string name, int turns)
     {
-        //number of turns should not be negative
-        if (turns < 0)
-        {
-            Console.WriteLine("Error: Turns cannot be negative.");//print error message
-            return;//exit the method
-        }
         var person = new Person(name, turns);//create a new person
         _people.Enqueue(person);//add them to the queue
 
@@ -49,18 +43,13 @@ public class TakingTurnsQueue
         //dequeue the next person
         var person = _people.Dequeue();
         //infinite turns
-        if (person.Turns <= 0)
+        if (person.Turns > 0)
+        {
+            person.Turns--;//reduce turns
+        }
+        if (person.Turns != 0)
         {
             _people.Enqueue(person);//add them back to the queue
-        }
-        else
-        {
-            //reduce turns and re-add to the queue
-            person.Turns--;
-            if(person.Turns > 0)
-            {
-                _people.Enqueue(person);
-            }
         }
 
             return person;
