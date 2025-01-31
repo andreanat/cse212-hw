@@ -13,23 +13,35 @@ public class PersonQueue
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
-        _queue.Insert(0, person);
+        _queue.Add(person);//add the person to the end of the queue
     }
+    /// <summary>
+    /// Remove a person from the queue
+    /// </summary>
+    /// <returns>The person that was removed</returns>
 
     public Person Dequeue()
     {
-        var person = _queue[0];
-        _queue.RemoveAt(0);
+        if (IsEmpty())
+        {
+            throw new InvalidOperationException("Queue is empty");
+        }
+        var person = _queue[0];//get the first person in the queue
+        _queue.RemoveAt(0);//remove the first person from the queue
         return person;
     }
+    // <summary>
+    /// Check if the queue is empty
+    /// </summary>
+    /// <returns>True if the queue is empty, false otherwise</returns>
 
     public bool IsEmpty()
     {
-        return Length == 0;
+        return Length == 0; //return true if the length of the queue is 0
     }
 
     public override string ToString()
     {
-        return $"[{string.Join(", ", _queue)}]";
+        return $"[{string.Join(", ", _queue.Select(p => p.ToString()))}]";//joins each person to a single string
     }
 }
