@@ -37,8 +37,7 @@ public class TakingTurnsQueue
     {
         if (_people.IsEmpty())
         {
-            Console.WriteLine("Error: Queue is empty.");//print error message
-            return null;//exit the method
+            throw new InvalidOperationException("The queue is empty.");
         }
         //dequeue the next person
         var person = _people.Dequeue();

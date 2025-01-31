@@ -1,4 +1,6 @@
-﻿public class PriorityQueue
+﻿using System.Collections.Generic;
+
+public class PriorityQueue
 {
     private List<PriorityItem> _queue = new();
 
@@ -57,6 +59,6 @@ internal class PriorityItem
 
     public override string ToString()
     {
-        return $"{Value} (Pri:{Priority})";
-    }
+        return $"{Value} (Priority: {Priority})";
+}
 }
