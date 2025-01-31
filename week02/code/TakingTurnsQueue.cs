@@ -23,7 +23,8 @@ public class TakingTurnsQueue
         //number of turns should not be negative
         if (turns < 0)
         {
-            throw new ArgumentException("Turns cannot be negative.");
+            Console.WriteLine("Error: Turns cannot be negative.");//print error message
+            return;//exit the method
         }
         var person = new Person(name, turns);//create a new person
         _people.Enqueue(person);//add them to the queue
@@ -42,7 +43,8 @@ public class TakingTurnsQueue
     {
         if (_people.IsEmpty())
         {
-            throw new InvalidOperationException("No one in the queue.");
+            Console.WriteLine("Error: Queue is empty.");//print error message
+            return null;//exit the method
         }
         //dequeue the next person
         var person = _people.Dequeue();
