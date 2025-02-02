@@ -96,36 +96,23 @@ public static class SetsAndMaps
         {
             return false;
         }
-         //create a dictionary to store the count of each character in word1
-        Dictionary<char, int> letterCount = new Dictionary<char, int>();
-        //count the frequency of each character in word
-        foreach (char c in word1)
+        //fixed array
+        int [] charCount = new int[256];
+        for (int i = 0; i < word1.Length; i++)
         {
-            //if the letter is already in the dictionary, increment the count
-            if (letterCount.ContainsKey(c))
-            {
-                letterCount[c]++;
-            }
-            else{
-                //otherwise intialize the count to 1
-                letterCount[c] = 1;
-            }
+            //increment the count for each character in word1
+            charCount[word1[i]]++;
+            //decrement the count for each character in word2
+            charCount[word2[i]]--;  
         }
-        //decrease the letter count for each character in word2
-        foreach (char c in word2)
+        //if all the counts are 0, the words are anagrams
+        foreach (int count in charCount)
         {
-            //if the letter is not in the dictionary, return false
-            if (!letterCount.ContainsKey(c))
+            if (count != 0)
             {
                 return false;
             }
-            //decrement the count
-            letterCount[c]--;
-            //if the count is less than 0, return false
-            if (letterCount[c] < 0)
-            {
-                return false;
-            }
+
         }
         //if all the counts are 0, the words are anagrams
         return true;
