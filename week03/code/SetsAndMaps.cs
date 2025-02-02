@@ -88,8 +88,6 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        //create a dictionary to store the count of each character in word1
-        Dictionary<char, int> letterCount = new Dictionary<char, int>();
         //convert both words to lower case and remove spaces
         word1 = word1.ToLower().Replace(" ", "");
         word2 = word2.ToLower().Replace(" ", "");
@@ -98,6 +96,8 @@ public static class SetsAndMaps
         {
             return false;
         }
+         //create a dictionary to store the count of each character in word1
+        Dictionary<char, int> letterCount = new Dictionary<char, int>();
         //count the frequency of each character in word
         foreach (char c in word1)
         {
