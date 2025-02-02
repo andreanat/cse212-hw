@@ -21,8 +21,20 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        //hashset = unordered collection of unique elements
+        HashSet<string> wordSet = new HashSet<string>(); //set for lookup
+        List<string> result = new List<string>(); //list to store pairs
+
+        foreach (string word in words)
+        {
+            string reversed = new string(new char[] { word[1], word[0] }); //reverse the word
+            if (wordSet.Contains(reversed)) //if reversed word is in set
+            {
+                result.Add($"{word} & {reversed}"); //add to result
+            }
+            wordSet.Add(word); //add word to set
+        }
+        return [];//return result
     }
 
     /// <summary>
@@ -42,7 +54,6 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
         }
 
         return degrees;
@@ -66,8 +77,47 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        //create a dictionary to store the count of each character in word1
+        Dictionary<char, int> letterCount = new Dictionary<char, int>();
+        //convert both words to lower case and remove spaces
+        word1 = word1.ToLower().Replace(" ", "");
+        word2 = word2.ToLower().Replace(" ", "");
+        //if the words are not the same length, they cannot be anagrams
+        if (word1.Length != word2.Length)
+        {
+            return false;
+        }
+        //count the frequency of each character in word
+        foreach (char c in word1)
+        {
+            //if the letter is already in the dictionary, increment the count
+            if (letterCount.ContainsKey(c))
+            {
+                letterCount[c]++;
+            }
+            else{
+                //otherwise intialize the count to 1
+                letterCount[c] = 1;
+            }
+        }
+        //decrease the letter count for each character in word2
+        foreach (char c in word2)
+        {
+            //if the letter is not in the dictionary, return false
+            if (!letterCount.ContainsKey(c))
+            {
+                return false;
+            }
+            //decrement the count
+            letterCount[c]--;
+            //if the count is less than 0, return false
+            if (letterCount[c] < 0)
+            {
+                return false;
+            }
+        }
+        //if all the counts are 0, the words are anagrams
+        return true;
     }
 
     /// <summary>
