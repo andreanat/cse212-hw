@@ -34,7 +34,7 @@ public static class SetsAndMaps
             }
             wordSet.Add(word); //add word to set
         }
-        return [];//return result
+        return result.ToArray();//return result
     }
 
     /// <summary>
