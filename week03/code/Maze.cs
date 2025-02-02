@@ -17,22 +17,29 @@
 public class Maze
 {
     private readonly Dictionary<ValueTuple<int, int>, bool[]> _mazeMap;
-    private int _currX = 1;
-    private int _currY = 1;
+    private int _currX = 1;//current x position
+    private int _currY = 1;//current y position
 
     public Maze(Dictionary<ValueTuple<int, int>, bool[]> mazeMap)
     {
         _mazeMap = mazeMap;
     }
 
-    // TODO Problem 4 - ADD YOUR CODE HERE
     /// <summary>
     /// Check to see if you can move left.  If you can, then move.  If you
     /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
     /// </summary>
     public void MoveLeft()
     {
-        // FILL IN CODE
+        // check if the current location is in the maze and if left is true
+        if (_mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][0])
+        {
+            _currX-= 1;//moveleft decreases the x value by 1
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -41,7 +48,14 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        if (_mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][1])
+        {
+            _currX+= 1;//moveright increases the x value by 1
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -50,7 +64,14 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        if (_mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][2])
+        {
+            _currY-= 1;//moveup decreases the y value by 1
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -59,7 +80,14 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        if (_mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][3])
+        {
+            _currY+= 1;//movedown increases the y value by 1
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     public string GetStatus()
