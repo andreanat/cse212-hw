@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -50,10 +51,22 @@ public static class SetsAndMaps
     /// <returns>fixed array of divisors</returns>
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
-        var degrees = new Dictionary<string, int>();
-        foreach (var line in File.ReadLines(filename))
+        Dictionary<string, int> degrees = new Dictionary<string, int>(); //dictionary to store degrees and counts
+        foreach (var line in File.ReadLines(filename))//read the file line by line
         {
             var fields = line.Split(",");
+            if (fields.Length <4) {continue;} //skip lines with less than 4 fields
+            //extract degree from 4th column
+
+            string degree = fields[3].Trim();
+            if (degrees.ContainsKey(degree)) //if degree is already in dictionary
+            {
+                degrees[degree]++; //increment the count
+            }
+            else
+            {
+                degrees[degree] = 1; //initialize the count to 1
+            }
         }
 
         return degrees;
