@@ -164,6 +164,7 @@ public static class Recursion
     /// </summary>
     public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
     {
+     
         // If this is the first time running the function, then we need
         // to initialize the currPath list.
         if (currPath == null) {
@@ -171,10 +172,29 @@ public static class Recursion
         }
         
         // currPath.Add((1,2)); // Use this syntax to add to the current path
-
+        currPath.Add((x,y));
         // TODO Start Problem 5
         // ADD CODE HERE
+        if (maze.IsEnd(x,y)){
+           results.Add(currPath.AsString());
+           currPath.RemoveAt(currPath.Count - 1);
+           return;
+        }
+        //movement directions
+        var directions = new List<(int dx, int dy)>{
+            (0,-1),
+            (0,1),
+            (-1,0),
+            (1,0)
 
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+        };
+        foreach (var(dx, dy)in directions){
+            int nextX = x + dx;
+            int nextY = y + dy;
+
+            if(maze.IsValidMove(nextX, nextY, currPath)){SolveMaze(results, maze, nextX, nextY, currPath);
+            }
+        }
+        currPath.RemoveAt(currPath.Count - 1);
     }
 }
