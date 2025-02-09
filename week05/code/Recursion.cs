@@ -143,7 +143,19 @@ public static class Recursion
     /// </summary>
     public static void WildcardBinary(string pattern, List<string> results)
     {
-        // TODO Start Problem 4
+        //if there are no wildcards left add it
+        if (!pattern.Contains("*")) {
+            results.Add(pattern);
+            return;
+        }
+        //recurse
+        int index = pattern.IndexOf("*");
+        //replace 
+        string cero = pattern.Substring(0, index) + "0" + pattern.Substring(index + 1);
+        WildcardBinary(cero, results);
+
+        string uno = pattern.Substring(0, index) + "1" + pattern.Substring(index + 1);
+        WildcardBinary(uno, results);
     }
 
     /// <summary>
