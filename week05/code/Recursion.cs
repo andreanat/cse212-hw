@@ -42,7 +42,21 @@ public static class Recursion
     /// </summary>
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
-        // TODO Start Problem 2
+        //BASE if the length of the word is the desired size  added to the results
+        if (word.Length == size)
+        {
+            results.Add(word);// add the permutation to the results
+            return;
+        }
+        //recursion iterate through the letters pick one and recurse the rest
+        for (int i=0; i <letters.Length; i++){
+            //take current letter and remove it
+            char chosen = letters[i];
+            string remaining = letters.Substring(0,i) + letters.Substring(i + 1);
+            // Recursive append the chosen letter and pass the remaining
+            PermutationsChoose(results, remaining, size, word + chosen);
+
+        }
     }
 
     /// <summary>
@@ -89,6 +103,10 @@ public static class Recursion
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null)
     {
+        // dictionary
+        if (remember == null){
+            remember = new Dictionary<int, decimal> ();
+        }
         // Base Cases
         if (s == 0)
             return 0;
@@ -98,11 +116,15 @@ public static class Recursion
             return 2;
         if (s == 3)
             return 4;
+        if (remember.ContainsKey(s)){
+            return remember [s];
+        }
 
         // TODO Start Problem 3
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+        remember [s] = ways;
         return ways;
     }
 
